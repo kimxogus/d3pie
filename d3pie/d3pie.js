@@ -1505,7 +1505,7 @@ var segments = {
 
 				return "translate(" + ((x/h) * pullOutSize) + ',' + ((y/h) * pullOutSize) + ")";
 			})
-			.each("end", function(d, i) {
+			.each(function(d, i) {
 				pie.currentlyOpenSegment = segment;
 				pie.isOpeningSegment = false;
 				d3.select(this).attr("class", pie.cssPrefix + "expanded");
@@ -1516,7 +1516,7 @@ var segments = {
 		d3.select(segment).transition()
 			.duration(400)
 			.attr("transform", "translate(0,0)")
-			.each("end", function(d, i) {
+			.each(function(d, i) {
 				d3.select(this).attr("class", "");
 				pie.currentlyOpenSegment = null;
 			});
