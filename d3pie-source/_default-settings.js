@@ -92,7 +92,7 @@ var defaultSettings = {
 			speed: 1000
 		},
 		pullOutSegmentOnClick: {
-			effect: "bounce",
+			effect: d3.easeBounce,
 			speed: 300,
 			size: 10
 		},

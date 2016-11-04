@@ -14,12 +14,10 @@ var tt = {
         .attr("id", function(d, i) { return pie.cssPrefix + "tooltip" + i; })
         .style("opacity", 0)
       .append("rect")
-        .attr({
-			    rx: pie.options.tooltips.styles.borderRadius,
-			    ry: pie.options.tooltips.styles.borderRadius,
-			    x: -pie.options.tooltips.styles.padding,
-			    opacity: pie.options.tooltips.styles.backgroundOpacity
-		    })
+        .attr("rx", pie.options.tooltips.styles.borderRadius)
+			  .attr("ry", pie.options.tooltips.styles.borderRadius)
+			  .attr("x", -pie.options.tooltips.styles.padding)
+			  .attr("opacity", pie.options.tooltips.styles.backgroundOpacity)
 		    .style("fill", pie.options.tooltips.styles.backgroundColor);
 
     tooltips.selectAll("." + pie.cssPrefix + "tooltip")

@@ -133,7 +133,7 @@ var defaultSettings = {
 			speed: 1000
 		},
 		pullOutSegmentOnClick: {
-			effect: "bounce",
+			effect: d3.easeBounce,
 			speed: 300,
 			size: 10
 		},
@@ -1009,8 +1009,8 @@ var labels = {
 			.append("g")
 			.attr("class", pie.cssPrefix + "lineGroup");
 
-		var lineFunction = d3.svg.line()
-			.interpolate("basis")
+		var lineFunction = d3.line()
+			.curve(d3.curveBasis)
 			.x(function(d) { return d.x; })
 			.y(function(d) { return d.y; });
 
@@ -1313,7 +1313,7 @@ var segments = {
 			.attr("transform", function() { return math.getPieTranslateCenter(pieCenter); })
 			.attr("class", pie.cssPrefix + "pieChart");
 
-		var arc = d3.svg.arc()
+		var arc = d3.arc()
 			.innerRadius(pie.innerRadius)
 			.outerRadius(pie.outerRadius)
 			.startAngle(0)
@@ -1345,7 +1345,7 @@ var segments = {
 			.style("stroke", segmentStroke)
 			.style("stroke-width", 1)
 			.transition()
-			.ease("cubic-in-out")
+			.ease(d3.easeCubicInOut)
 			.duration(loadSpeed)
 			.attr("data-index", function(d, i) { return i; })
 			.attrTween("d", function(b) {
@@ -1592,12 +1592,10 @@ var text = {
 			.enter()
 			.append("text")
 			.text(function(d) { return d.text; })
-			.attr({
-        id: pie.cssPrefix + "title",
-        class: pie.cssPrefix + "title",
-        x: text.offscreenCoord,
-        y: text.offscreenCoord
-      })
+			.attr("id", pie.cssPrefix + "title")
+			.attr("class", pie.cssPrefix + "title")
+			.attr("x", text.offscreenCoord)
+			.attr("y", text.offscreenCoord)
 			.attr("text-anchor", function() {
 				var location;
 				if (pie.options.header.location === "top-center" || pie.options.header.location === "pie-center") {
@@ -1778,12 +1776,10 @@ var tt = {
         .attr("id", function(d, i) { return pie.cssPrefix + "tooltip" + i; })
         .style("opacity", 0)
       .append("rect")
-        .attr({
-			    rx: pie.options.tooltips.styles.borderRadius,
-			    ry: pie.options.tooltips.styles.borderRadius,
-			    x: -pie.options.tooltips.styles.padding,
-			    opacity: pie.options.tooltips.styles.backgroundOpacity
-		    })
+        .attr("rx", pie.options.tooltips.styles.borderRadius)
+			  .attr("ry", pie.options.tooltips.styles.borderRadius)
+			  .attr("x", -pie.options.tooltips.styles.padding)
+			  .attr("opacity", pie.options.tooltips.styles.backgroundOpacity)
 		    .style("fill", pie.options.tooltips.styles.backgroundColor);
 
     tooltips.selectAll("." + pie.cssPrefix + "tooltip")
