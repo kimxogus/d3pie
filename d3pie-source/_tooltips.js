@@ -39,20 +39,18 @@ var tt = {
         });
 
 		tooltips.selectAll("." + pie.cssPrefix + "tooltip rect")
-			.attr({
-				width: function (d, i) {
+			.attr("width", function (d, i) {
 					var dims = helpers.getDimensions(pie.cssPrefix + "tooltip" + i);
 					return dims.w + (2 * pie.options.tooltips.styles.padding);
-				},
-				height: function (d, i) {
+				})
+			.attr("height", function (d, i) {
 					var dims = helpers.getDimensions(pie.cssPrefix + "tooltip" + i);
 					return dims.h + (2 * pie.options.tooltips.styles.padding);
-				},
-				y: function (d, i) {
+				})
+			.attr("y", function (d, i) {
 					var dims = helpers.getDimensions(pie.cssPrefix + "tooltip" + i);
 					return -(dims.h / 2) + 1;
-				}
-			});
+				});
 	},
 
   showTooltip: function(pie, index) {
