@@ -1801,23 +1801,22 @@ var tt = {
         });
 
 		tooltips.selectAll("." + pie.cssPrefix + "tooltip rect")
-			.attr({
-				width: function (d, i) {
+			.attr("width", function (d, i) {
 					var dims = helpers.getDimensions(pie.cssPrefix + "tooltip" + i);
 					return dims.w + (2 * pie.options.tooltips.styles.padding);
-				},
-				height: function (d, i) {
+				})
+			.attr("height", function (d, i) {
 					var dims = helpers.getDimensions(pie.cssPrefix + "tooltip" + i);
 					return dims.h + (2 * pie.options.tooltips.styles.padding);
-				},
-				y: function (d, i) {
+				})
+			.attr("y", function (d, i) {
 					var dims = helpers.getDimensions(pie.cssPrefix + "tooltip" + i);
 					return -(dims.h / 2) + 1;
-				}
-			});
+				});
 	},
 
   showTooltip: function(pie, index) {
+    index = Math.round(index);
 
 	  var fadeInSpeed = pie.options.tooltips.styles.fadeInSpeed;
 	  if (tt.currentTooltip === index) {
@@ -1844,6 +1843,7 @@ var tt = {
   },
 
   hideTooltip: function(pie, index) {
+    index = Math.round(index);
     d3.select("#" + pie.cssPrefix + "tooltip" + index)
       .style("opacity", function() { return 0; });
 
@@ -1860,6 +1860,7 @@ var tt = {
   },
 
   replacePlaceholders: function(pie, str, index, replacements) {
+    index = Math.round(index);
 
     // if the user has defined a placeholderParser function, call it before doing the replacements
     if (helpers.isFunction(pie.options.tooltips.placeholderParser)) {
