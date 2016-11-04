@@ -54,6 +54,7 @@ var tt = {
 	},
 
   showTooltip: function(pie, index) {
+    index = Math.round(index);
 
 	  var fadeInSpeed = pie.options.tooltips.styles.fadeInSpeed;
 	  if (tt.currentTooltip === index) {
@@ -80,6 +81,7 @@ var tt = {
   },
 
   hideTooltip: function(pie, index) {
+    index = Math.round(index);
     d3.select("#" + pie.cssPrefix + "tooltip" + index)
       .style("opacity", function() { return 0; });
 
@@ -96,6 +98,7 @@ var tt = {
   },
 
   replacePlaceholders: function(pie, str, index, replacements) {
+    index = Math.round(index);
 
     // if the user has defined a placeholderParser function, call it before doing the replacements
     if (helpers.isFunction(pie.options.tooltips.placeholderParser)) {
